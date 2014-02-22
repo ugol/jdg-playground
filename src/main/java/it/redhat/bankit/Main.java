@@ -36,7 +36,6 @@ public class Main {
         banner();
         log.info("Connecting to Node: " + node);
         new JDG().connect(node).attachUI(new TextUI(System.in, System.out)).processCommands();
-        log.info("JDG Status: " + node.getManager().getStatus());
 
     }
 
