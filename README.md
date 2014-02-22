@@ -14,9 +14,7 @@ Install the Maven repositories
 
 Installing JDG 6.2 maven repository, which depends by the EAP 6.1.1 Maven repository, is the first step.
 
-You'll find detailed instructions to install the Maven repositories in the JDG 6.2 "Getting Started Guide":
-
-https://access.redhat.com/site/documentation/en-US/Red_Hat_JBoss_Data_Grid/6.2/html-single/Getting_Started_Guide/index.html#chap-Install_and_Use_the_Maven_Repositories
+You'll find detailed instructions to install the Maven repositories in the JDG 6.2 [Getting Started Guide] (https://access.redhat.com/site/documentation/en-US/Red_Hat_JBoss_Data_Grid/6.2/html-single/Getting_Started_Guide/index.html#chap-Install_and_Use_the_Maven_Repositories)
 
 For your reference, you will find an example settings.xml to copy in your .m2 directory in the example-maven-settings directory.
 
