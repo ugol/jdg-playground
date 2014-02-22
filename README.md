@@ -6,14 +6,15 @@ A small project to learn and explore Jboss Data Grid (Infinispan)
 Build instructions
 ==================
 
+To build the code you just need Maven and the JDG repositories installed somewhere (for a simple setup, just download the repositories and install them locally on your disk).
+You *won't* need to install the JDG server, as this example is engineered to run in Library mode.
 
 Install the Maven repositories
 ------------------------------
 
-To build the code, you have to install JDG 6.2 maven repository, which depends by the EAP 6.1.1 Maven repository too.
-You *won't* need to install the JDG server, as this example is engineered to run in Libary mode.
+Installing JDG 6.2 maven repository, which depends by the EAP 6.1.1 Maven repository, is the first step.
 
-You'll find detailed instructions to install the Maven repositories in the JDG 6.2 "Getting Started Guide"
+You'll find detailed instructions to install the Maven repositories in the JDG 6.2 "Getting Started Guide":
 
 https://access.redhat.com/site/documentation/en-US/Red_Hat_JBoss_Data_Grid/6.2/html-single/Getting_Started_Guide/index.html#chap-Install_and_Use_the_Maven_Repositories
 
@@ -30,9 +31,13 @@ After installing the repositories, you just have to clone the code and run some 
 For example to launch four nodes on a single machine (or four different machines) just run these commands using different terminals:
 
 mvn -DskipTests -P node1 clean install exec:java
+
 mvn -DskipTests -P node2 clean install exec:java
+
 mvn -DskipTests -P node3 clean install exec:java
+
 mvn -DskipTests -P node4 clean install exec:java
+
 
 Usage
 -----
