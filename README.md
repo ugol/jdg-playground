@@ -18,7 +18,7 @@ You'll find detailed instructions to install the Maven repositories in the JDG 6
 
 For your reference, you will find an example settings.xml to copy in your .m2 directory in the example-maven-settings directory.
 
-This Maven settings.xml assumes you have installed the repositories in the following locations, so edit it accordingly:
+This Maven settings.xml assumes you have unzipped the repositories in the following locations, so edit it accordingly:
 
 * /opt/jboss-datagrid-6.2.0-maven-repository/
 * /opt/jboss-eap-6.1.1.GA-maven-repository
