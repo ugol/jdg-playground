@@ -6,8 +6,7 @@ import java.util.Set;
 
 public class TextUI {
 
-    public TextUI(InfinispanDAO dao, InputStream in, PrintStream out) {
-        this.dao = dao;
+    public TextUI(InputStream in, PrintStream out) {
         this.in = new BufferedReader(new InputStreamReader(in));
         this.out = out;
     }
@@ -16,7 +15,7 @@ public class TextUI {
 
         boolean keepRunning = true;
         while(keepRunning) {
-            System.out.print("> ");
+            out.print("> ");
             out.flush();
             String line = in.readLine();
             if(line == null) {
@@ -24,6 +23,10 @@ public class TextUI {
             }
             keepRunning = processLine(line);
         }
+    }
+
+    public void setJdg(JDG jdg) {
+        this.jdg = jdg;
     }
 
     private boolean processLine(String line) {
@@ -34,51 +37,45 @@ public class TextUI {
         if(readCommand(scanner, "put") && scanner.hasNext()) {
             Long id = Long.parseLong(scanner.next());
             String value = scanner.next();
-            dao.put(id, value);
+            jdg.put(id, value);
             out.println("Written (" + id + "," + value + ")");
         }
 
         else if(readCommand(scanner, "get") && scanner.hasNext()) {
             Long id = Long.parseLong(scanner.next());
-            out.println(dao.get(id));
+            out.println(jdg.get(id));
         }
 
         else if(readCommand(scanner, "modify") && scanner.hasNext()) {
             Long id = Long.parseLong(scanner.next());
             String value = scanner.next();
-            out.println(dao.modify(id, value));
+            out.println(jdg.modify(id, value));
             out.println("Modified (" + id + "," + value + ")");
         }
 
         else if(readCommand(scanner, "all")) {
-            //printValues(dao.keySetOnServer());
+            //printValues(jdg.keySetOnServer());
         }
 
         else if(readCommand(scanner, "local")) {
-            printValues(dao.keySet());
+            printValues(jdg.keySet());
         }
 
         else if(readCommand(scanner, "clear")) {
-            dao.clear();
-        }
-
-        else if(readCommand(scanner, "lock")) {
-            //dao.lock();
-        }
-
-        else if(readCommand(scanner, "unlock")) {
-            //dao.unlock();
-        }
-
-        else if(readCommand(scanner, "grantor")) {
-            //dao.grantor();
+            jdg.clear();
         }
 
         else if (readCommand(scanner, "exit|quit|q|x")) {
+            jdg.shutdown();
             return false;
         }
-        else {
+
+        else if(readCommand(scanner, "help")) {
             usage();
+        }
+
+        else {
+            out.println("> ");
         }
 
         return true;
@@ -102,25 +99,21 @@ public class TextUI {
         out.println("     List all local valuesFromKeys.");
         out.println("clear");
         out.println("     Clear all valuesFromKeys.");
-        out.println("lock");
-        out.println("     Get the distributed lock.");
-        out.println("unlock");
-        out.println("     Release the distributed lock.");
-        out.println("grantor");
-        out.println("     See if the current system is grantor for locks.");
+        out.println("help");
+        out.println("     List of commands.");
         out.println("quit");
         out.println("     Exit the shell.");
     }
 
     private boolean readCommand(Scanner scanner, String command) {
-        if(scanner.hasNext(command)) {
+        if (scanner.hasNext(command)) {
             scanner.next(command);
             return true;
         }
         return false;
     }
 
-    private final InfinispanDAO dao;
+    private JDG jdg;
     private final BufferedReader in;
     private final PrintStream out;
 

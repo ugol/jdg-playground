@@ -6,9 +6,9 @@ import org.infinispan.manager.EmbeddedCacheManager;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InfinispanDAO {
+public class JDG {
 
-    public void connect(JDGNode node) {
+    public JDG connect(JDGNode node) {
 
         System.out.println("Using Server Infinispan configuration");
         cacheManager = node.getManager();
@@ -16,6 +16,12 @@ public class InfinispanDAO {
         cache = cacheManager.getCache();
         System.out.println("Connected to cacheManager: " + cache.toString());
 
+        return this;
+    }
+
+    public TextUI attachUI(TextUI ui) {
+        ui.setJdg(this);
+        return ui;
     }
 
     public Set<String> keySet() {
@@ -37,6 +43,10 @@ public class InfinispanDAO {
 
     public void clear() {
         cache.clear();
+    }
+
+    public void shutdown() {
+        cacheManager.stop();
     }
 
     protected Set<String> valuesFromKeys(Set<Long> keys) {
