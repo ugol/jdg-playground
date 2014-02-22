@@ -12,7 +12,8 @@ You *won't* need to install the JDG server, as this example is engineered to run
 Install the Maven repositories
 ------------------------------
 
-Installing JDG 6.2 maven repository, which depends by the EAP 6.1.1 Maven repository, is the first step.
+Installing [JDG 6.2 maven repository](https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=27433&product=data.grid&version=&downloadType=distributions),
+which depends by the [EAP 6.1.1 Maven repository](https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=24173&product=appplatform&version=6.1.1&downloadType=distributions), is the first step.
 
 You'll find detailed instructions to install the Maven repositories in the JDG 6.2 [Getting Started Guide] (https://access.redhat.com/site/documentation/en-US/Red_Hat_JBoss_Data_Grid/6.2/html-single/Getting_Started_Guide/index.html#chap-Install_and_Use_the_Maven_Repositories)
 
