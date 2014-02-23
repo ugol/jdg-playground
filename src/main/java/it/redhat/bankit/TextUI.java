@@ -71,8 +71,30 @@ public class TextUI {
             out.println("Modified (" + id + "," + value + ")");
         }
 
-        else if(readCommand(scanner, "all")) {
-            //printValues(jdg.keySetOnServer());
+        else if(readCommand(scanner, "loadtest")) {
+            
+            jdg.put(1, "Led Zeppelin");
+            jdg.put(2, "Deep Purple");
+            jdg.put(3, "Jethro Tull");
+            jdg.put(4, "Pink Floyd");
+            jdg.put(5, "Arctic Monkeys");
+            jdg.put(6, "Franz Ferdinand");
+            jdg.put(7, "Queen");
+            jdg.put(8, "The Police");
+            jdg.put(9, "Frank Zappa");
+            jdg.put(10, "Dire Straits");
+            jdg.put(11, "The Who");
+            jdg.put(12, "Van Halen");
+            jdg.put(13, "Jimi Hendrix");
+            jdg.put(14, "Queens of the Stone Age");
+            jdg.put(15, "Pearl Jam");
+            jdg.put(16, "U2");
+            jdg.put(17, "Lynyrd Skynyrd");
+            jdg.put(18, "AC/DC");
+            jdg.put(19, "Janis Joplin");
+            jdg.put(20, "Prince");
+            out.println("Data grid loaded with example values.");
+
         }
 
         else if(readCommand(scanner, "local")) {
@@ -81,6 +103,7 @@ public class TextUI {
 
         else if(readCommand(scanner, "clear")) {
             jdg.clear();
+            out.println("Data grid cleared.");
         }
 
         else if(readCommand(scanner, "info")) {
@@ -88,6 +111,7 @@ public class TextUI {
         }
 
         else if (readCommand(scanner, "exit|quit|q|x")) {
+            out.println("Shutting down...");
             jdg.shutdown();
             return false;
         }
@@ -113,10 +137,12 @@ public class TextUI {
         out.println("Commands:");
         out.println("get id");
         out.println("     Get an object from the grid.");
-        out.println("put id text");
-        out.println("     Put an object (id, text) in the grid.");
-        out.println("all");
-        out.println("     List all valuesFromKeys.");
+        out.println("put id value");
+        out.println("     Put an object (id, value) in the grid.");
+        out.println("modify id value");
+        out.println("     Modify an id object with value.");
+        out.println("loadtest");
+        out.println("     Load some example values in the grid");
         out.println("local");
         out.println("     List all local valuesFromKeys.");
         out.println("clear");
@@ -125,7 +151,7 @@ public class TextUI {
         out.println("     Information on cache.");
         out.println("help");
         out.println("     List of commands.");
-        out.println("quit");
+        out.println("exit|quit|q|x");
         out.println("     Exit the shell.");
     }
 
