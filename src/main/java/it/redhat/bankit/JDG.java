@@ -71,6 +71,7 @@ public class JDG {
         info.append("Coordinator address: ").append(cacheManager.getCoordinator()).append("\n");
         info.append("Is Coordinator: ").append(cacheManager.isCoordinator()).append("\n");
         info.append("Cluster Name: ").append(cacheManager.getClusterName()).append("\n");
+        info.append("Member list: ").append(cacheManager.getMembers()).append("\n");
         info.append("Cache name: ").append(cache.toString()).append("\n");
         info.append("Cache size: ").append(cache.size()).append("\n");
         info.append("Cache status: ").append(cache.getStatus()).append("\n");
