@@ -19,8 +19,10 @@ package it.redhat.bankit;
 
 import org.infinispan.Cache;
 import org.infinispan.manager.EmbeddedCacheManager;
+import org.infinispan.remoting.transport.Address;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -58,6 +60,10 @@ public class JDG {
 
     public void clear() {
         cache.clear();
+    }
+
+    public List<Address> locate(long id) {
+        return cache.getAdvancedCache().getDistributionManager().getConsistentHash().locateOwners(id);
     }
 
     public void shutdown() {

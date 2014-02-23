@@ -64,6 +64,11 @@ public class TextUI {
             out.println(jdg.get(id));
         }
 
+        else if(readCommand(scanner, "locate") && scanner.hasNext()) {
+            Long id = Long.parseLong(scanner.next());
+            out.println(jdg.locate(id));
+        }
+
         else if(readCommand(scanner, "modify") && scanner.hasNext()) {
             Long id = Long.parseLong(scanner.next());
             String value = scanner.next();
@@ -72,7 +77,7 @@ public class TextUI {
         }
 
         else if(readCommand(scanner, "loadtest")) {
-            
+
             jdg.put(1, "Led Zeppelin");
             jdg.put(2, "Deep Purple");
             jdg.put(3, "Jethro Tull");
@@ -141,8 +146,10 @@ public class TextUI {
         out.println("     Put an object (id, value) in the grid.");
         out.println("modify id value");
         out.println("     Modify an id object with value.");
+        out.println("locate id");
+        out.println("     Locate an object in the grid.");
         out.println("loadtest");
-        out.println("     Load some example values in the grid");
+        out.println("     Load example values in the grid");
         out.println("local");
         out.println("     List all local valuesFromKeys.");
         out.println("clear");
