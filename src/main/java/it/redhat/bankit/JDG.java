@@ -66,11 +66,14 @@ public class JDG {
 
     public String info() {
         StringBuilder info = new StringBuilder();
-        info.append("Status: ").append(cacheManager.getStatus()).append("\n");
-        info.append("Address: ").append(cacheManager.getAddress()).append("\n");
-        info.append("Cluster Name: ").append(cacheManager.getClusterName()).append("\n");
-        info.append("Is Coordinator: ").append(cacheManager.isCoordinator()).append("\n");
+        info.append("Cache Manager Status: ").append(cacheManager.getStatus()).append("\n");
+        info.append("Cache Manager Address: ").append(cacheManager.getAddress()).append("\n");
         info.append("Coordinator address: ").append(cacheManager.getCoordinator()).append("\n");
+        info.append("Is Coordinator: ").append(cacheManager.isCoordinator()).append("\n");
+        info.append("Cluster Name: ").append(cacheManager.getClusterName()).append("\n");
+        info.append("Cache name: ").append(cache.toString()).append("\n");
+        info.append("Cache size: ").append(cache.size()).append("\n");
+        info.append("Cache status: ").append(cache.getStatus()).append("\n");
         return info.toString();
     }
 
