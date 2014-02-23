@@ -81,6 +81,8 @@ public class JDG {
         info.append("Cache name: ").append(cache.toString()).append("\n");
         info.append("Cache size: ").append(cache.size()).append("\n");
         info.append("Cache status: ").append(cache.getStatus()).append("\n");
+        info.append("Number of owners: ").append(cache.getAdvancedCache().getDistributionManager().getConsistentHash().getNumOwners()).append("\n");
+        info.append("Number of segments: ").append(cache.getAdvancedCache().getDistributionManager().getConsistentHash().getNumSegments()).append("\n");
         return info.toString();
     }
 
