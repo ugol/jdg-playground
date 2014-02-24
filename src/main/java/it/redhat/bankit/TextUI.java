@@ -18,8 +18,11 @@
 package it.redhat.bankit;
 
 import java.io.*;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 public class TextUI {
@@ -117,6 +120,22 @@ public class TextUI {
 
         else if(readCommand(scanner, "routing")) {
             out.println(jdg.routingTable());
+        }
+
+        else if(readCommand(scanner, "rotate") && scanner.hasNext()) {
+            Integer offset = Integer.parseInt(scanner.next());
+            List<Future> results = jdg.rot(offset);
+            out.println("Rotated all strings of " + offset + " characters");
+
+            for (Future result:results) {
+                try {
+                    out.print(result.get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         else if (readCommand(scanner, "exit|quit|q|x")) {

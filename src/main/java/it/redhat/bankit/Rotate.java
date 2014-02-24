@@ -17,40 +17,39 @@
 
 package it.redhat.bankit;
 
+import org.infinispan.Cache;
+import org.infinispan.distexec.DistributedCallable;
+
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Value implements Serializable {
+public class Rotate implements DistributedCallable, Serializable {
 
-    public Value(String val) {
-      this.val = val;
-    }
-
-    public Value setVal(String val) {
-        this.val = val;
-        return this;
+    public Rotate(int shift) {
+        this.shift = shift;
     }
 
     @Override
-    public String toString() {
-        return val;
+    public void setEnvironment(Cache cache, Set set) {
+        this.cache = cache;
     }
 
-    public Value rotate(int offset) {
 
-        offset = offset % 26 + 26;
-        StringBuilder encoded = new StringBuilder();
-        for (char i : val.toLowerCase().toCharArray()) {
-            if (Character.isLetter(i)) {
-                int j = (i - 'a' + offset) % 26;
-                encoded.append((char) (j + 'a'));
-            } else {
-                encoded.append(i);
-            }
+    @Override
+    public Set<Value> call() throws Exception {
+
+        Set<Long> keys = cache.keySet();
+        Set<Value> result = new HashSet<Value>();
+
+        for (long l : keys) {
+            Value v = cache.get(l);
+            result.add(v.rotate(shift));
         }
-        return new Value(encoded.toString());
-
+        return result;
     }
 
-    private String val;
+    private transient Cache<Long, Value> cache;
+    private int shift;
 
 }

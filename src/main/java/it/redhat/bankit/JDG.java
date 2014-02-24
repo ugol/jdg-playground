@@ -18,12 +18,15 @@
 package it.redhat.bankit;
 
 import org.infinispan.Cache;
+import org.infinispan.distexec.DefaultExecutorService;
+import org.infinispan.distexec.DistributedExecutorService;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.infinispan.remoting.transport.Address;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 public class JDG {
@@ -98,9 +101,13 @@ public class JDG {
         return values;
     }
 
-    protected EmbeddedCacheManager cacheManager;
-    protected Cache<Long, Value> cache;
+    public List<Future> rot(int offset) {
+        DistributedExecutorService des = new DefaultExecutorService(cache);
+        return des.submitEverywhere(new Rotate(offset));
+    }
 
+    private EmbeddedCacheManager cacheManager;
+    private Cache<Long, Value> cache;
     private Logger log = Logger.getLogger(this.getClass().getName());
 
 }
