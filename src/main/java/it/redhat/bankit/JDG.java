@@ -48,6 +48,10 @@ public class JDG {
         return valuesFromKeys(cache.keySet());
     }
 
+    public Set<String> primaryKeySet() {
+        return primaryValuesFromKeys(cache.keySet());
+    }
+
     public Value get(long id) {
         return cache.get(id);
     }
@@ -93,7 +97,16 @@ public class JDG {
         return cache.getAdvancedCache().getDistributionManager().getConsistentHash().getRoutingTableAsString();
     }
 
-    protected Set<String> valuesFromKeys(Set<Long> keys) {
+    public List<Future> rot(int offset) {
+        DistributedExecutorService des = new DefaultExecutorService(cache);
+        return des.submitEverywhere(new Rotate(offset));
+    }
+
+    public static boolean checkIfCacheIsPrimaryFor(Cache<Long, Value> cache, long key) {
+        return cache.getAdvancedCache().getDistributionManager().getPrimaryLocation(key).equals(cache.getCacheManager().getAddress());
+    }
+
+    private Set<String> valuesFromKeys(Set<Long> keys) {
         Set<String> values = new HashSet<String>();
         for (long l : keys) {
             values.add(l + "," + get(l));
@@ -101,9 +114,14 @@ public class JDG {
         return values;
     }
 
-    public List<Future> rot(int offset) {
-        DistributedExecutorService des = new DefaultExecutorService(cache);
-        return des.submitEverywhere(new Rotate(offset));
+    private Set<String> primaryValuesFromKeys(Set<Long> keys) {
+        Set<String> values = new HashSet<String>();
+        for (long l : keys) {
+            if (checkIfCacheIsPrimaryFor(cache, l)) {
+                values.add(l + "," + get(l));
+            }
+        }
+        return values;
     }
 
     private EmbeddedCacheManager cacheManager;

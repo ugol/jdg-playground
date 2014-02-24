@@ -42,9 +42,13 @@ public class Rotate implements DistributedCallable, Serializable {
         Set<Long> keys = cache.keySet();
         Set<Value> result = new HashSet<Value>();
 
-        for (long l : keys) {
-            Value v = cache.get(l);
-            result.add(v.rotate(shift));
+        for (long key : keys) {
+
+            if (JDG.checkIfCacheIsPrimaryFor(cache, key)) {
+                Value v = cache.get(key);
+                result.add(v.rotate(shift));
+            }
+
         }
         return result;
     }

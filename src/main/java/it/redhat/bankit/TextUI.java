@@ -109,6 +109,10 @@ public class TextUI {
             printValues(jdg.keySet());
         }
 
+        else if(readCommand(scanner, "primary")) {
+            printValues(jdg.primaryKeySet());
+        }
+
         else if(readCommand(scanner, "clear")) {
             jdg.clear();
             out.println("Data grid cleared.");
@@ -129,7 +133,7 @@ public class TextUI {
 
             for (Future result:results) {
                 try {
-                    out.print(result.get());
+                    out.println(result.get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -175,6 +179,8 @@ public class TextUI {
         out.println("     Load example values in the grid");
         out.println("local");
         out.println("     List all local valuesFromKeys.");
+        out.println("primary");
+        out.println("     List all local valuesFromKeys for which this node is primary.");
         out.println("clear");
         out.println("     Clear all valuesFromKeys.");
         out.println("info");
