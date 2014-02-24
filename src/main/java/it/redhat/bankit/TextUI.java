@@ -185,6 +185,8 @@ public class TextUI {
         out.println("     Clear all valuesFromKeys.");
         out.println("info");
         out.println("     Information on cache.");
+        out.println("rotate n");
+        out.println("     Apply a rotate n on String values with a Distributed Executor");
         out.println("routing");
         out.println("     Print routing table.");
         out.println("help");

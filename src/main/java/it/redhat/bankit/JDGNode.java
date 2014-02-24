@@ -61,7 +61,7 @@ public class JDGNode {
         return name;
     }
 
-    protected DefaultCacheManager manager;
+    private DefaultCacheManager manager;
     private String name;
     private Logger log = Logger.getLogger(this.getClass().getName());
 
