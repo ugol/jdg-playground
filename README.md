@@ -44,8 +44,9 @@ Usage
 -----
 
 Every node will have its own command line interface "attached", which you can use to play with your Data Grid.
-Type 'help' on the command line to show a list of commands
+Type 'help' on the command line to show a list of commands:
 
+```shell
 get id
 
      Get an object from the grid.
@@ -96,3 +97,4 @@ help
 
 exit|quit|q|x
      Exit the shell.
+```
