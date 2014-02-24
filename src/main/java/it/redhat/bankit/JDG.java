@@ -86,6 +86,10 @@ public class JDG {
         return info.toString();
     }
 
+    public String routingTable() {
+        return cache.getAdvancedCache().getDistributionManager().getConsistentHash().getRoutingTableAsString();
+    }
+
     protected Set<String> valuesFromKeys(Set<Long> keys) {
         Set<String> values = new HashSet<String>();
         for (long l : keys) {

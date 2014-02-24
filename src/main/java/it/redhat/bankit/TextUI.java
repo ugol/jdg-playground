@@ -115,6 +115,10 @@ public class TextUI {
             out.print(jdg.info());
         }
 
+        else if(readCommand(scanner, "routing")) {
+            out.println(jdg.routingTable());
+        }
+
         else if (readCommand(scanner, "exit|quit|q|x")) {
             out.println("Shutting down...");
             jdg.shutdown();
@@ -156,6 +160,8 @@ public class TextUI {
         out.println("     Clear all valuesFromKeys.");
         out.println("info");
         out.println("     Information on cache.");
+        out.println("routing");
+        out.println("     Print routing table.");
         out.println("help");
         out.println("     List of commands.");
         out.println("exit|quit|q|x");
